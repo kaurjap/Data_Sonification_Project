@@ -52,7 +52,6 @@ public class MainFrame extends JFrame {
         indexGroup = new ButtonGroup(); 
         playButton = new JButton("Play");
         
-        // this.setLayout(new GridLayout(12,0));
         addComponents();
         this.setSize(800, 600);
         this.setVisible(true);

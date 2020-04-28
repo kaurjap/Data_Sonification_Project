@@ -48,6 +48,7 @@ public class ReadFile {
             inFile.nextLine(); // get the first line out of the way
             while (inFile.hasNextLine()) {
                 dateString = inFile.next();
+                // storing the date as a Date object to make it easier to graph
                 Date date = formatter.parse(dateString);
                 open = inFile.nextFloat();
                 high = inFile.nextFloat();
@@ -68,6 +69,7 @@ public class ReadFile {
     
     public boolean inTimeRange(Date date) {
         boolean inTime = false;
+        // formatting the date to extract day, month, and year from it
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         if (this.time.equals("6 Months")) {

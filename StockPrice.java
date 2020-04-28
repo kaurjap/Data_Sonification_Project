@@ -1,8 +1,7 @@
-   
+// DataPoint.java
+ 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-// DataPoint.java
 
 /* This class represents a specific point in the data. It represents a specific stock price. 
  * An aggregation of all class objects of this class are the elements in the array list of 

@@ -1,6 +1,6 @@
 // Graph.java
 // the Swing part of the GUI is wrapped around SwingUtilities.invokeLater
-// the JavaFX setscene part of the GUI is wrapped around platform.runLater
+// the JavaFX setscene part of the GUI is wrapped around platform.runLater, but not in this case because we need to run the graph first
 
 import java.applet.Applet;
 import java.awt.Container;
@@ -48,11 +48,14 @@ public class Graph extends Applet {
         Container pane = frame.getContentPane();
         JFXPanel fxPanel = new JFXPanel(); // to add the graph to the swing GUI
         
+        // setting up the Axes
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis("Stock Prices (dollars)", yMin, yMax, yInterval);
         xAxis.setLabel("Time");
         
+        // setting up the LineChart using the LineChart class
         LineChart<String, Number> trendline = new LineChart<>(xAxis, yAxis);
+        // the data is created as a series and then added to the linechart (trendline)
         XYChart.Series series = new XYChart.Series<>();
         series.setName("Prices");
         trendline.setTitle("Stock Data Over Time");
@@ -67,6 +70,8 @@ public class Graph extends Applet {
         // adding the trendline/chart to the series
         trendline.getData().add(series);
         
+        // scene is like a container in JFrame
+        // setting the scene in order to add the graph to the panel
         Scene scene = new Scene(trendline, 800, 600);
         fxPanel.setScene(scene); 
         
@@ -85,8 +90,6 @@ public class Graph extends Applet {
         this.totalDataPoints = prices.size();
     } // end setSizeData
 
-    
-    
     
     
     // access methods

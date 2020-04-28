@@ -30,6 +30,7 @@ public class Main extends MainFrame implements ActionListener {
         playButton.addActionListener(this);
     } // end constructor
   
+    // method implemented from the ActionListener interface
     @Override
     public void actionPerformed(ActionEvent e) {
 
