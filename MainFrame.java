@@ -1,7 +1,9 @@
 
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -9,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.SwingConstants;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,9 +24,10 @@ import javax.swing.JRadioButton;
  * @author japneetkaur
  */
 @SuppressWarnings("serial")
-public class BottomPanel extends JFrame {
+public class MainFrame extends JFrame {
     
     Container container;
+    JPanel mainPanel;
     
     // drop down menus for the time menu, index, instrument, and the price to watch
     protected JComboBox<String> time = new JComboBox<>(new String[] {"6 Months", "1 Year", "2 Years", "5 Years"});
@@ -37,22 +41,28 @@ public class BottomPanel extends JFrame {
     protected JRadioButton NYSE, NASDAQ, DJIA;
     protected ButtonGroup indexGroup;
     protected JButton playButton;
+    protected JLabel pageTitle;
     
-    public BottomPanel() {
+    public MainFrame() {
         super();
+        
         container = this.getContentPane();
+        mainPanel = new JPanel();
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 30, 20, 30));
+        mainPanel.setLayout(new GridLayout(12,0));
         whatIndex = new JLabel("Select the preferred Stock Index:");
         selectInstrument = new JLabel("Select the intrument that you like:");
         selectTime = new JLabel("Select the time:");
         whichPrice = new JLabel("Select the price category:");
-        
+        pageTitle = new JLabel("STOCK MARKET DATA SONIFICATION", SwingConstants.CENTER);
+
         NYSE = new JRadioButton("NYSE");
         NASDAQ = new JRadioButton("NASDAQ");
         DJIA = new JRadioButton("DJIA");
         indexGroup = new ButtonGroup(); 
         playButton = new JButton("Play");
         
-        this.setLayout(new FlowLayout());
+        // this.setLayout(new GridLayout(12,0));
         addComponents();
         this.setSize(800, 600);
         this.setVisible(true);
@@ -61,76 +71,30 @@ public class BottomPanel extends JFrame {
     
     
     public void addComponents() {
+        Font font = new Font("Verdana", Font.BOLD, 20);
+        pageTitle.setFont(font);
+        mainPanel.add(pageTitle);
+        mainPanel.add(whatIndex);
         // grouping the index buttons together
         indexGroup.add(this.NYSE);
         indexGroup.add(this.NASDAQ);
         indexGroup.add(this.DJIA);
         // adding index buttons to the separate menu frame first
-        this.add(this.NYSE, JFrame.CENTER_ALIGNMENT); 
-        this.add(this.NASDAQ, JFrame.CENTER_ALIGNMENT);
-        this.add(this.DJIA, JFrame.CENTER_ALIGNMENT);
+        mainPanel.add(this.NYSE, JFrame.CENTER_ALIGNMENT); 
+        mainPanel.add(this.NASDAQ, JFrame.CENTER_ALIGNMENT);
+        mainPanel.add(this.DJIA, JFrame.CENTER_ALIGNMENT);
         // adding the time dropdown to the page
-        this.add(this.selectTime, JFrame.CENTER_ALIGNMENT);
-        this.add(time, JPanel.CENTER_ALIGNMENT);
+        mainPanel.add(this.selectTime, JFrame.CENTER_ALIGNMENT);
+        mainPanel.add(time, JPanel.CENTER_ALIGNMENT);
         // adding the instrument dropdown to the page
-        this.add(this.selectInstrument, JFrame.CENTER_ALIGNMENT);
-        this.add(instruments, JFrame.CENTER_ALIGNMENT);
+        mainPanel.add(this.selectInstrument, JFrame.CENTER_ALIGNMENT);
+        mainPanel.add(instruments, JFrame.CENTER_ALIGNMENT);
         // adding the price drop down menu
-        this.add(whichPrice, JFrame.CENTER_ALIGNMENT);
-        this.add(priceToWatch, JFrame.CENTER_ALIGNMENT);
-        this.add(playButton);
+        mainPanel.add(whichPrice, JFrame.CENTER_ALIGNMENT);
+        mainPanel.add(priceToWatch, JFrame.CENTER_ALIGNMENT);
+        mainPanel.add(playButton);
+        container.add(mainPanel);
     } // end addComponents
 
-    
-    // access methods
-    public JComboBox<String> getTime() {
-        return time;
-    }
-
-    public JComboBox<String> getInstruments() {
-        return instruments;
-    }
-
-    public JComboBox<String> getPriceToWatch() {
-        return priceToWatch;
-    }
-
-    public JLabel getWhatIndex() {
-        return whatIndex;
-    }
-
-    public JLabel getSelectInstrument() {
-        return selectInstrument;
-    }
-
-    public JLabel getSelectTime() {
-        return selectTime;
-    }
-
-    public JLabel getWhichPrice() {
-        return whichPrice;
-    }
-
-    public JRadioButton getNYSE() {
-        return NYSE;
-    }
-
-    public JRadioButton getNASDAQ() {
-        return NASDAQ;
-    }
-
-    public JRadioButton getDJIA() {
-        return DJIA;
-    }
-
-    public ButtonGroup getIndexGroup() {
-        return indexGroup;
-    }
-
-    public JButton getPlayButton() {
-        return playButton;
-    }
-    
-    
     
 } // end class def

@@ -3,18 +3,17 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.SwingUtilities;
 
-// Main.java
 
-public class Main extends BottomPanel implements ActionListener {
+public class Main extends MainFrame implements ActionListener {
    
     // array to store all the stockprices based on the user's selections
     protected ArrayList<StockPrice> stockprices;
     protected ArrayList<Integer> pitches;
     protected ReadFile reader;
     protected SoundPlayer player;
-    //protected BottomPanel bottomPanel;
-    //protected Graph myGraph;
+
     
      // the MAIN function
     public static void main(String[] args) {
@@ -22,17 +21,12 @@ public class Main extends BottomPanel implements ActionListener {
     } // end main
 
     
-    
     public Main() {
         super();
         stockprices = new ArrayList<>();
         reader = new ReadFile();
         player = new SoundPlayer();
         pitches = new ArrayList<>();
-        //myGraph = new Graph();
-        //bottomPanel = new BottomPanel();
-        //myGraph.setBottomPanel(bottomPanel);
-        //bottomPanel.getPlayButton().addActionListener(this);
         playButton.addActionListener(this);
     } // end constructor
   
@@ -56,11 +50,9 @@ public class Main extends BottomPanel implements ActionListener {
             reader.setFilename("./DJIA.csv");
             reader.readDataTo(stockprices);
         } else {
-            
+            System.out.println("No Index Type Selected!");
         } // end if
-                
-        System.out.println("StockPrices Array size after reading: " + stockprices.size());
-        
+                        
         // change the instrument accordingly
         String selected;
         selected = (String) instruments.getSelectedItem();
@@ -130,17 +122,28 @@ public class Main extends BottomPanel implements ActionListener {
             pitches.add(priceCasted);
         } // end for
         
-        // the pitches arrayList is now populated with the pitches to play
-        // now play the sound accordingly
-        System.out.println("Instrument: " + player.getInstrument());
-        for (int i = 0; i < pitches.size(); i++) {
-            player.setPitch(pitches.get(i));
-            player.playSound();
-            System.out.println(pitches.get(i) + " ----->    $" + stockprices.get(i).getValueToPlay()/100);
-            System.out.println("Count " + i);
-            // to change the date, prolly add a new Runnable here somewhere
-        } // end for
-
+        try {
+            Thread.sleep(1000); // wait for 1 second
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        } // end try-catch
+        
+        // invoke this later so that it runs in the end after the graph is displayed
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                // the pitches arrayList is now populated with the pitches to play
+                // now play the sound accordingly
+                System.out.println("Instrument: " + player.getInstrument());
+                for (int i = 0; i < pitches.size(); i++) {
+                    player.setPitch(pitches.get(i));
+                    player.playSound();
+                    System.out.println("Date: " + stockprices.get(i).getDate());
+                    System.out.println("Pitch: " + pitches.get(i) + " ----->    Price: $" + stockprices.get(i).getValueToPlay()/100);
+                    System.out.println("Number of Days: " + i + "\n\n");
+                } // end for            
+            } // end run
+        });
     } // end actionPerformed
     
     

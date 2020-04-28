@@ -1,4 +1,4 @@
-Main.class: Main.java StockPrice.class ReadFile.class SoundPlayer.class BottomPanel.class Graph.class
+Main.class: Main.java StockPrice.class ReadFile.class SoundPlayer.class MainFrame.class Graph.class
 	javac -g Main.java
 
 StockPrice.class: Stockprice.java
@@ -10,8 +10,8 @@ ReadFile.class: ReadFile.java
 SoundPlayer.class: SoundPlayer.java
 	javac -g SoundPlayer.java
 
-BottomPanel.class: BottomPanel.java
-	javac -g BottomPanel.java
+MainFrame.class: MainFrame.java
+	javac -g MainFrame.java
 
 Graph.class: Graph.java
 	javac -g Graph.java

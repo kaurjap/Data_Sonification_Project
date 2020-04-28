@@ -42,12 +42,12 @@ public class Graph extends Applet {
         //this.bottomPanel = bottomPanel;
         this.setDataSize();
         this.setYInterval();
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                init(); // run the init method
-            } // end run
-        });
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                init(); // run the init method
+//            } // end run
+//        });
         init();
     } // end constructor
     
@@ -84,7 +84,7 @@ public class Graph extends Applet {
         
         pane.add(fxPanel);
         //pane.add(this.bottomPanel);
-        frame.setSize(500, 500);
+        frame.setSize(1000, 1000);
         frame.setVisible(true);
         
         
