@@ -10,6 +10,8 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javax.swing.JFrame;
+//import javax.swing.JPanel;
+//import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 
 // Graph.java
@@ -24,6 +26,11 @@ public class Graph extends Applet {
     protected float yMax;
     protected float yInterval;
     protected ArrayList<StockPrice> prices;
+    //protected JPanel bottomPanel;
+    
+    public Graph() {
+        this.prices = new ArrayList<>();
+    } // end constructor
     
     // make this act like the main function in the other example
     public Graph(float yMin, float yMax, float rangeYAxis, ArrayList<StockPrice> arr) {
@@ -32,6 +39,7 @@ public class Graph extends Applet {
         this.rangeYAxis = rangeYAxis/100;
         this.prices = new ArrayList<>();
         this.prices = arr;
+        //this.bottomPanel = bottomPanel;
         this.setDataSize();
         this.setYInterval();
         SwingUtilities.invokeLater(new Runnable() {
@@ -40,7 +48,7 @@ public class Graph extends Applet {
                 init(); // run the init method
             } // end run
         });
-        
+        init();
     } // end constructor
     
     // to create and show the GUI
@@ -71,20 +79,28 @@ public class Graph extends Applet {
         // adding the trendline/chart to the series
         trendline.getData().add(series);
         
+        Scene scene = new Scene(trendline, 800, 600);
+        fxPanel.setScene(scene); 
+        
         pane.add(fxPanel);
+        //pane.add(this.bottomPanel);
         frame.setSize(500, 500);
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        Platform.runLater(new Runnable() {
-            
-            @Override
-            public void run() {
-                Scene scene = new Scene(trendline, 800, 600);
-                fxPanel.setScene(scene);                    
-            } // end run
-        }); // end platform.runLater
         
+//        JSplitPane split = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+//        split.setTopComponent(fxPanel);
+//        split.setBottomComponent(this.bottomPanel);
+//        
+//        Platform.runLater(new Runnable() {
+//            
+//            @Override
+//            public void run() {
+//                Scene scene = new Scene(trendline, 800, 600);
+//                fxPanel.setScene(scene);                    
+//            } // end run
+//        }); // end platform.runLater
+//        
         
     } // end init
     
@@ -96,5 +112,51 @@ public class Graph extends Applet {
     public void setDataSize() {
         this.totalDataPoints = prices.size();
     } // end setSizeData
+
+    
+    
+    
+    
+    // access methods
+    public void setRangeYAxis(float rangeYAxis) {
+        this.rangeYAxis = rangeYAxis;
+    }
+
+    public void setyMin(float yMin) {
+        this.yMin = yMin;
+    }
+
+    public void setyMax(float yMax) {
+        this.yMax = yMax;
+    }
+
+    public void setPrices(ArrayList<StockPrice> prices) {
+        this.prices = prices;
+    }
+
+//    public void setBottomPanel(JPanel bottomPanel) {
+//        this.bottomPanel = bottomPanel;
+//    }
+
+    public float getRangeYAxis() {
+        return rangeYAxis;
+    }
+
+    public float getyMin() {
+        return yMin;
+    }
+
+    public float getyMax() {
+        return yMax;
+    }
+
+    public ArrayList<StockPrice> getPrices() {
+        return prices;
+    }
+
+//    public JPanel getBottomPanel() {
+//        return bottomPanel;
+//    }
+    
     
 } // end class def
