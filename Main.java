@@ -96,6 +96,7 @@ public class Main extends MainFrame implements ActionListener {
         Graph myGraph = new Graph(minNum, maxNum, rangeFrom, stockprices);
         
         /*
+        Algorithm to convert data from one range to another:
         output = output_start + ((output_end - output_start) / (input_end - input_start)) * (input - input_start)
         
         Or, think about it this way

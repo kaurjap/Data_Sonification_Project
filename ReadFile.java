@@ -14,7 +14,6 @@ import java.util.Scanner;
 public class ReadFile {
     
     protected String filename;
-    protected File theFile;
     protected String time;
     
     public ReadFile() {

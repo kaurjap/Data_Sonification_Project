@@ -40,8 +40,7 @@ public class SoundPlayer {
         GUITAR = 24,
         VIOLIN = 40,
         TRUMPET = 56,
-        FLUTE = 73,
-        STEEL_DRUMS = 114;
+        FLUTE = 73;
         
     
     // method that plays the sound based on the set attributes of the class

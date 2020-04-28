@@ -1,6 +1,6 @@
+// MainFrame.java
 
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
@@ -13,21 +13,11 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author japneetkaur
- */
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
     
-    Container container;
-    JPanel mainPanel;
+    protected Container container;
+    protected JPanel mainPanel;
     
     // drop down menus for the time menu, index, instrument, and the price to watch
     protected JComboBox<String> time = new JComboBox<>(new String[] {"6 Months", "1 Year", "2 Years", "5 Years"});

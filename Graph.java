@@ -1,8 +1,10 @@
+// Graph.java
+// the Swing part of the GUI is wrapped around SwingUtilities.invokeLater
+// the JavaFX setscene part of the GUI is wrapped around platform.runLater
 
 import java.applet.Applet;
 import java.awt.Container;
 import java.util.ArrayList;
-import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
@@ -10,13 +12,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javax.swing.JFrame;
-//import javax.swing.JPanel;
-//import javax.swing.JSplitPane;
-import javax.swing.SwingUtilities;
 
-// Graph.java
-// the Swing part of the GUI is wrapped around SwingUtilities.invokeLater
-// the JavaFX setscene part of the GUI is wrapped around platform.runLater
 
 public class Graph extends Applet {
     
@@ -26,7 +22,6 @@ public class Graph extends Applet {
     protected float yMax;
     protected float yInterval;
     protected ArrayList<StockPrice> prices;
-    //protected JPanel bottomPanel;
     
     public Graph() {
         this.prices = new ArrayList<>();
@@ -39,15 +34,8 @@ public class Graph extends Applet {
         this.rangeYAxis = rangeYAxis/100;
         this.prices = new ArrayList<>();
         this.prices = arr;
-        //this.bottomPanel = bottomPanel;
         this.setDataSize();
         this.setYInterval();
-//        SwingUtilities.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                init(); // run the init method
-//            } // end run
-//        });
         init();
     } // end constructor
     
@@ -83,24 +71,8 @@ public class Graph extends Applet {
         fxPanel.setScene(scene); 
         
         pane.add(fxPanel);
-        //pane.add(this.bottomPanel);
         frame.setSize(1000, 1000);
         frame.setVisible(true);
-        
-        
-//        JSplitPane split = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-//        split.setTopComponent(fxPanel);
-//        split.setBottomComponent(this.bottomPanel);
-//        
-//        Platform.runLater(new Runnable() {
-//            
-//            @Override
-//            public void run() {
-//                Scene scene = new Scene(trendline, 800, 600);
-//                fxPanel.setScene(scene);                    
-//            } // end run
-//        }); // end platform.runLater
-//        
         
     } // end init
     
@@ -133,11 +105,7 @@ public class Graph extends Applet {
     public void setPrices(ArrayList<StockPrice> prices) {
         this.prices = prices;
     }
-
-//    public void setBottomPanel(JPanel bottomPanel) {
-//        this.bottomPanel = bottomPanel;
-//    }
-
+    
     public float getRangeYAxis() {
         return rangeYAxis;
     }
@@ -154,9 +122,4 @@ public class Graph extends Applet {
         return prices;
     }
 
-//    public JPanel getBottomPanel() {
-//        return bottomPanel;
-//    }
-    
-    
 } // end class def
